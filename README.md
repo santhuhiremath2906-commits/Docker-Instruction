@@ -26,16 +26,16 @@ sudo apt-get install docker-compose -y
 
 Before we can run the application, we need to get the application source code onto our machine.
 
-1. Clone the repo --> getting-started using the following command:
+1. Clone the repo --> getting-started-nodejs using the following command:
     
     ```bash
-      git clone https://github.com/amigo-nishant/getting-started.git
+      git clone https://github.com/santhuhiremath2906-commits/getting-started-nodejs-nodejs.git
     ```
     
 2. View the contents of the cloned repository. We should see the following files and sub-directories.
     
     ```bash
-    ├── getting-started-app/
+    ├── getting-started-nodejs/
     │ ├── package.json
     │ ├── README.md
     │ ├── spec/
@@ -45,13 +45,13 @@ Before we can run the application, we need to get the application source code on
 ### NOTE:
 - Before we Dockerize the app let's run this app locally
 - In real time we can connect with Developers or check the app README.md file for the instructions written by developers to deploy locally.
-- Here's the README.md file for the NodeJS App written by Developer - https://github.com/amigo-nishant/getting-started.git 
+- Here's the README.md file for the NodeJS App written by Developer - https://github.com/santhuhiremath2906-commits/getting-started-nodejs-nodejs.git 
 
 **Build the app’s image**
 
 To build the image, We'll need to use a Dockerfile. A Dockerfile is simply a text-based file with no file extension that contains a script of instructions. Docker uses this script to build a container image.
 
-1. In the `getting-started-app` directory, the same location as the `package.json` file, create a file named `Dockerfile`. 
+1. In the `getting-started-nodejs` directory, the same location as the `package.json` file, create a file named `Dockerfile`. 
 2.  We can use the following commands to create a Dockerfile based on our operating system.
     
     ---
@@ -59,7 +59,7 @@ To build the image, We'll need to use a Dockerfile. A Dockerfile is simply a tex
     Create an empty file named `Dockerfile`.
     
     ```bash
-      cd getting-started/
+      cd getting-started-nodejs/
       touch Dockerfile
     ```
     
@@ -81,14 +81,14 @@ To build the image, We'll need to use a Dockerfile. A Dockerfile is simply a tex
 4. Build the image using the following commands:
     
     ```bash
-      docker build -t getting-started .
+      docker build -t getting-started-nodejs .
     ```
     
     The `docker build` command uses the Dockerfile to build a new image. You might have noticed that Docker downloaded a lot of "layers". This is because you instructed the builder that you wanted to start from the `node:24-alpine` image. But, since you didn't have that on your machine, Docker needed to download the image.
     
     After Docker downloaded the image, the instructions from the Dockerfile copied in your application and used `yarn` to install your application's dependencies. The `CMD` directive specifies the default command to run when starting a container from this image.
     
-    Finally, the `-t` flag tags your image. Think of this as a human-readable name for the final image. Since you named the image `getting-started`, you can refer to that image when you run a container.
+    Finally, the `-t` flag tags your image. Think of this as a human-readable name for the final image. Since you named the image `getting-started-nodejs`, you can refer to that image when you run a container.
     
     The `.` at the end of the `docker build` command tells Docker that it should look for the `Dockerfile` in the current directory.
 
@@ -105,7 +105,7 @@ Now that we have an image, we can run the application in a container using the 
 1. Run our container using the `docker run` command and specify the name of the image we just created:
     
     ```bash
-      docker run -dp 3000:3000 getting-started
+      docker run -dp 3000:3000 getting-started-nodejs
     ```
     
     The `-d` flag (short for `--detach`) runs the container in the background. This means that Docker starts your container and returns you to the terminal prompt. You can verify that a container is running by viewing it in Docker Dashboard under **Containers**, or by running `docker ps` in the terminal.
@@ -119,7 +119,7 @@ Now that we have an image, we can run the application in a container using the 
 
 At this point, we have a running todo list manager with a few items.
 
-If you take a quick look at your containers, you should see at least one container running that's using the `getting-started` image and on port `3000`. To see your containers, you can use the CLI or Docker Desktop's graphical interface.
+If you take a quick look at your containers, you should see at least one container running that's using the `getting-started-nodejs` image and on port `3000`. To see your containers, you can use the CLI or Docker Desktop's graphical interface.
 
 CLI Docker Desktop
 
@@ -141,7 +141,7 @@ Output similar to the following should appear.
 
 ```bash
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                      NAMES
-df784548666d        getting-started     "docker-entrypoint.s…"   2 minutes ago       Up 2 minutes        127.0.0.1:3000->3000/tcp   priceless_mcclintock
+df784548666d        getting-started-nodejs     "docker-entrypoint.s…"   2 minutes ago       Up 2 minutes        127.0.0.1:3000->3000/tcp   priceless_mcclintock
 ```
 
 To login to the container shell we can run:
@@ -164,13 +164,13 @@ To login to the container shell we can run:
 2. Build your updated version of the image, using the `docker build` command.
     
     ```bash
-      docker build -t getting-started .
+      docker build -t getting-started-nodejs .
     ```
     
 3. Start a new container using the updated code.
     
     ```bash
-      docker run -dp 3000:3000 getting-started
+      docker run -dp 3000:3000 getting-started-nodejs
     ```
     
 4. You probably saw an error like this:
@@ -220,7 +220,7 @@ docker rm -f <the-container-id>
 1. Now, start your updated app using the `docker run` command.
     
     ```bash
-      docker run -dp 3000:3000 getting-started
+      docker run -dp 3000:3000 getting-started-nodejs
     ```
     
 2. Refresh your browser and you should see your updated help text.
@@ -235,33 +235,33 @@ To push an image, we first need to create a repository on Docker Hub.
 
 1. [Sign up](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade) or Sign in to [Docker Hub](https://hub.docker.com/).
 2. Select the **Create Repository** button.
-3. For the repository name, use `getting-started`. Make sure the **Visibility** is **Public**.
+3. For the repository name, use `getting-started-nodejs`. Make sure the **Visibility** is **Public**.
 4. Select **Create**.
 
 ## Push the image
 
-1. In the command line, run the `docker push` command that you see on Docker Hub. Note that your command will have your Docker ID, not "docker". For example, `docker push YOUR-USER-NAME/getting-started`.
+1. In the command line, run the `docker push` command that you see on Docker Hub. Note that your command will have your Docker ID, not "docker". For example, `docker push YOUR-USER-NAME/getting-started-nodejs`.
     
     ```bash
-      docker push docker/getting-started
+      docker push docker/getting-started-nodejs
     ```
-    The push refers to repository [docker.io/docker/getting-started]
-    An image does not exist locally with the tag: docker/getting-started
+    The push refers to repository [docker.io/docker/getting-started-nodejs]
+    An image does not exist locally with the tag: docker/getting-started-nodejs
     
-    Why did it fail? The push command was looking for an image named `docker/getting-started`, but didn't find one. If you run `docker image ls`, you won't see one either.
+    Why did it fail? The push command was looking for an image named `docker/getting-started-nodejs`, but didn't find one. If you run `docker image ls`, you won't see one either.
     
     To fix this, you need to tag your existing image you've built to give it another name.
     
-2. Use the `docker tag` command to give the `getting-started` image a new name. Replace `YOUR-USER-NAME` with your Docker ID.
+2. Use the `docker tag` command to give the `getting-started-nodejs` image a new name. Replace `YOUR-USER-NAME` with your Docker ID.
     
     ```bash
-      docker tag getting-started YOUR-USER-NAME/getting-started
+      docker tag getting-started-nodejs YOUR-USER-NAME/getting-started-nodejs
     ```
     
 3. Now run the `docker push` command again. If you're copying the value from Docker Hub, you can drop the `tagname` part, as you didn't add a tag to the image name. If you don't specify a tag, Docker uses a tag called `latest`.
     
     ```bash
-      docker push YOUR-USER-NAME/getting-started
+      docker push YOUR-USER-NAME/getting-started-nodejs
     ```
     
 
@@ -290,7 +290,7 @@ You can create the volume and start the container using the CLI or Docker Deskto
 2. Start the todo app container, but add the `--mount` option to specify a volume mount. Give the volume a name, and mount it to `/app` in the container, which captures all files created at the path. 
 
 ```bash
-  docker run -dp 3000:3000 --mount type=volume,src=todo-db,target=/app getting-started
+  docker run -dp 3000:3000 --mount type=volume,src=todo-db,target=/app getting-started-nodejs
 ```
 
 ---
@@ -338,8 +338,8 @@ A bind mount is another type of mount, which lets you share a directory from the
 
 Before looking at how you can use bind mounts for developing your application, you can run a quick experiment to get a practical understanding of how bind mounts work.
 
-1. Verify that your `getting-started-app` directory is in a directory defined in Docker Desktop's file sharing setting. 
-2. Open a terminal and change directory to the `getting-started-app` directory.
+1. Verify that your `getting-started-nodejs` directory is in a directory defined in Docker Desktop's file sharing setting. 
+2. Open a terminal and change directory to the `getting-started-nodejs` directory.
 3. Run the following command to start `bash` in an `ubuntu` container with a bind mount.
     
     ---
@@ -350,7 +350,7 @@ Before looking at how you can use bind mounts for developing your application, y
     
     ---
     
-    The `--mount` option tells Docker to create a bind mount, where `src` is the current working directory on your host machine (`getting-started-app`), and `target` is where that directory should appear inside the container (`/src`).
+    The `--mount` option tells Docker to create a bind mount, where `src` is the current working directory on your host machine (`getting-started-nodejs`), and `target` is where that directory should appear inside the container (`/src`).
     
 4. After running the command, Docker starts an interactive `bash` session in the root directory of the container's filesystem.
     
@@ -364,7 +364,7 @@ Before looking at how you can use bind mounts for developing your application, y
     
 5. Change directory to the `src` directory.
     
-    This is the directory that you mounted when starting the container. Listing the contents of this directory displays the same files as in the `getting-started-app` directory on your host machine.
+    This is the directory that you mounted when starting the container. Listing the contents of this directory displays the same files as in the `getting-started-nodejs-app` directory on your host machine.
     
     ```bash
     root@ac1237fad8db:/# cd src
@@ -380,10 +380,10 @@ Before looking at how you can use bind mounts for developing your application, y
     Dockerfile  myfile.txt  node_modules  package.json  spec  src  yarn.lock
     ```
     
-7. Open the `getting-started-app` directory on the host and observe that the `myfile.txt` file is in the directory.
+7. Open the `getting-started-nodejs` directory on the host and observe that the `myfile.txt` file is in the directory.
     
     ```bash
-    ├── getting-started-app/
+    ├── getting-started-nodejs/
     │ ├── Dockerfile
     │ ├── myfile.txt
     │ ├── node_modules/
@@ -490,7 +490,7 @@ The todo app supports the setting of a few environment variables to specify MySQ
 
 You can now start your dev-ready container.
 
-1. Specify each of the previous environment variables, as well as connect the container to your app network. Make sure that you are in the `getting-started-app` directory when you run this command.
+1. Specify each of the previous environment variables, as well as connect the container to your app network. Make sure that you are in the `getting-started-nodejs-app` directory when you run this command.
     
     ---
     
@@ -556,10 +556,10 @@ Docker-compose is a tool that helps you define and share multi-container applica
 
 ## Create the Compose File
 
-In the `getting-started-app` directory, create a file named `compose.yaml`.
+In the `getting-started-nodejs` directory, create a file named `compose.yaml`.
 
 ```bash
-├── getting-started-app/
+├── getting-started-nodejs/
 │ ├── Dockerfile
 │ ├── compose.yaml
 │ ├── node_modules/
@@ -788,12 +788,12 @@ CMD ["node", "src/index.js"]
 1. Build the image using the following commands:
     
     ```bash
-      docker build -t getting-started .
+      docker build -t getting-started-nodejs .
     ```
 2. Run the container using the `docker run` command:
     
     ```bash
-      docker run -dp 3000:3000 getting-started
+      docker run -dp 3000:3000 getting-started-nodejs
     ```
 
 ### Benefits of Multi-Stage Dockerfile in Production Environments
